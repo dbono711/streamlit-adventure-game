@@ -1,0 +1,9 @@
+logs.log
+.venv
+.vscode
+.pytest_cache
+.code-workspace
+__pycache__
+Pipfile
+secrets.env
+*.code-workspace
