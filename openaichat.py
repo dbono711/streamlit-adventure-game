@@ -4,14 +4,9 @@ import os
 
 import dotenv
 import openai
+import streamlit as st
 
 dotenv.load_dotenv("secrets.env")
-
-_AI_MODEL_OPTIONS: list[str] = [
-    "gpt-3.5-turbo",
-    "gpt-4",
-    "gpt-4-32k",
-]
 
 
 class OpenAi():
@@ -31,4 +26,7 @@ class OpenAi():
             max_tokens = 1024,
         )
 
-        return completion.choices[0].message.content
+        response = completion.choices[0].message.content
+        st.session_state.messages.append({"role": "assistant", "content": response})
+        
+        return response

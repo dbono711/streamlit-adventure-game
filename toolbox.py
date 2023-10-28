@@ -1,6 +1,8 @@
 # -*- mode: python; python-indent: 4 -*-
 """Docstring Missing."""
-import re
+import random
+
+import streamlit as st
 
 from loggerfactory import LoggerFactory
 
@@ -11,10 +13,19 @@ class Toolbox():
     def __init__(self):
         """Docstring missing."""
         self.logger = LoggerFactory.get_logger("app.py", log_level="WARNING")
-    
-    def get_selection(self, number, response):
-        """Docstring missing."""
-        pattern = rf"{number}\.\s(.*?):"
-        match = re.search(pattern, response)
+
+    def cast_selection(self, key):
+        key["active"] = True
+        key["disabled"] = True
         
-        return match.group(1) if re.search(pattern, response) else None
+        if st.session_state["start"]["disabled"]:
+            self.generate_numbers()
+    
+    def generate_numbers(self):
+        """Docstring missing."""
+        for stat in ("health", "magic", "coins"):
+            current = st.session_state["character"][stat]["value"]
+            new = random.randrange(0, 100, 1)
+
+            st.session_state["character"][stat]["value"] = new
+            st.session_state["character"][stat]["delta"] = (new - current) + 10

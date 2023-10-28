@@ -1,12 +1,13 @@
 # -*- mode: python; python-indent: 4 -*-
 """Docstring missing."""
-from character import Character
 
 
-class Mage(Character):
+class Mage():
     """Docstring missing."""
 
     def __init__(self):
         """Docstring missing."""
-        Character.__init__(self)
+        self.character = "Mage"
+        self.character_icon = ":mage:"
         self.weapon = "Staff"
+        self.weapon_icon = ":magic_wand:"
